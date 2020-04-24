@@ -22,7 +22,7 @@ router.post('/signup', async(req, res) => {
 
 
 router.post('/signin', async (req,res)=>{
-    const {phone_number, address}=req.body
+    const {phone_number, address}=req.params
     if(!phone_number || !address)
     {
         res.status(422).send({error:"phone_number should not be empty"})
