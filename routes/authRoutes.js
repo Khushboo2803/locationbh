@@ -7,7 +7,7 @@ const router=express.Router();
 const User= mongoose.model('user');
 router.get('/signup', async(req, res) => {
    
-    const {phone_number, address}=req.params;
+    const {phone_number, address}=req.query;
     try{
         const user=new User({phone_number, address});
         await user.save();
