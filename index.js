@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const cors=require('cors');
 
 require('./models/user');
-app.use(cors)
+app.use(cors())
 
 app.use(function(req,res,next){
     res.header("Access-Control-Allow-Origin","*");
