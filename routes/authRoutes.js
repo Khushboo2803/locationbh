@@ -5,9 +5,9 @@ const {jwtkey}=require('../keys')
 const router=express.Router();
 
 const User= mongoose.model('user');
-router.post('/signup', async(req, res) => {
+router.get('/signup', async(req, res) => {
    
-    const {phone_number, address}=req.body;
+    const {phone_number, address}=req.params;
     try{
         const user=new User({phone_number, address});
         await user.save();

@@ -16,18 +16,16 @@ app.use(function(req,res,next){
     next();
 });
 
-//const authRoutes=require('./routes/authRoutes')
+const authRoutes=require('./routes/authRoutes')
 app.use(bodyParser.json());
-//app.use(authRoutes)
+
 
 
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('connected'))
     .catch(err => console.log(err));
 
-app.get('/signup', (req,res)=>{
-    res.send("signUp successful")
-})
+app.get('/signup', authRoutes)
 
 app.listen(port, () => {
     console.log('running on 300');
