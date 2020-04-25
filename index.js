@@ -57,7 +57,7 @@ app.get('/Signin',async(req,res)=>{
 })
 
 app.get('/Update', async(req,res)=>{
-    User.update({'phone_number':phone_number}, {$push: {'address': address}});
+    await User.update({'phone_number':phone_number}, {$push: {'address': address}});
     res.send("success");
 })
 app.listen(port, () => {
