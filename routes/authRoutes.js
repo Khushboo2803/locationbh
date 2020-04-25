@@ -6,8 +6,15 @@ const User= mongoose.model('user');
 
 router.get('/Update',async(req,res)=>{
     const phone_number=req.query;
-    await User.update({'phone_number':phone_number}, {$set: {'address': address}});
-    res.send("success");
+    try{
+        await User.update({'phone_number':phone_number}, {$set: {'address': address}});
+        res.send("success");
+    }
+    catch(err)
+    {
+        res.send(err.message);
+    }
+    
 })
 
 router.get('/Check', async(req,res)=>{
@@ -22,7 +29,6 @@ router.get('/Check', async(req,res)=>{
         else{
             res.send("not");
         }
-        
     }
     catch(err)
     {
