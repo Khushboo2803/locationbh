@@ -34,7 +34,7 @@ app.get('/Register', async(req,res)=>{
     }
     catch(err)
     {
-        res.log(err.message);
+        res.send(err.message);
     }
 })
 
