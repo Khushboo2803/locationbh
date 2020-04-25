@@ -8,16 +8,12 @@ router.get('/Update',async(req,res)=>{
     const {phone_number, address}=req.query;
     try{
         const response = await User.update({'phone_number':phone_number}, {$push: {'address': address}});
-
             res.send("success");
-        
-       
     }
     catch(err)
     {
-        res.send("err.message");
+        res.send(err.message);
     }
-    
 })
 
 router.get('/Check', async(req,res)=>{
