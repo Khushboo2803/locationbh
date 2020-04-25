@@ -27,28 +27,11 @@ app.get('/signup', authRoutes)
 
 app.get('/Register', authRoutes)
 
-app.get('/Check', async(req,res)=>{
-    const {phone_number}=req.query
-    const doExist=await User.find({phone_number}).countDocuments();
-    if(doExist>0)
-    {
-        res.send("exist");
-    }
-    else{
-        res.send("not");
-    }
-})
+app.get('/Check', authRoutes)
 
-app.get('/Signin',async(req,res)=>{
-    const {phone_number}=req.query
-    const user=await User.find({phone_number}, {address:1});
-    res.send(user);
-})
+app.get('/Signin',authRoutes)
 
-app.get('/Update', async(req,res)=>{
-    await User.update({'phone_number':phone_number}, {$push: {'address': address}});
-    res.send("success");
-})
+app.get('/Update', authRoutes)
 app.listen(port, () => {
     console.log('running on 300');
 })

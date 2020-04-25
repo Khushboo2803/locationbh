@@ -17,6 +17,22 @@ router.get('/signup', async(req, res) => {
     }
     
 })
+router.get('/Update',async(req,res)=>{
+    await User.update({'phone_number':phone_number}, {$push: {'address': address}});
+    res.send("success");
+})
+
+router.get('/Check', async(req,res)=>{
+    const {phone_number}=req.query
+    const doExist=await User.find({phone_number}).countDocuments();
+    if(doExist>0)
+    {
+        res.send("exist");
+    }
+    else{
+        res.send("not");
+    }
+})
 
 router.get('/Register', async(req,res)=>{
     const {phone_number}=req.query
