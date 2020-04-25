@@ -57,7 +57,8 @@ app.get('/Signin',async(req,res)=>{
 })
 
 app.get('/Update', async(req,res)=>{
-
+    User.update({'phone_number':phone_number}, {$set: {'address': address}});
+    res.send("success");
 })
 app.listen(port, () => {
     console.log('running on 300');
