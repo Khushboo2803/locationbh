@@ -3,21 +3,9 @@ const mongoose=require('mongoose')
 const router=express.Router();
 
 const User= mongoose.model('user');
-router.get('/signup', async(req, res) => {
-   
-    const {phone_number, address}=req.query;
-    try{
-        const user=new User({phone_number, address});
-        await user.save();
-        res.send("user saved");
-    }
-    catch(err)
-    {
-        res.status(422).send(err.message);
-    }
-    
-})
+
 router.get('/Update',async(req,res)=>{
+    const phone_number=req.query;
     await User.update({'phone_number':phone_number}, {$push: {'address': address}});
     res.send("success");
 })
@@ -48,23 +36,10 @@ router.get('/Register', async(req,res)=>{
 })
 
 
-router.post('/signin', async (req,res)=>{
-    const {phone_number, address}=req.params
-    if(!phone_number || !address)
-    {
-        res.status(422).send({error:"phone_number should not be empty"})
-    }
-    
-        const user= await User.find({phone_number})
-        
-            if(!user)
-            {
-                res.status(422).send({error:"not exist"})
-            }
-            else
-            {
-                res.status(422).send({error:"found "})
-            }
+router.post('/signin', async(req,res)=>{
+    const {phone_number}=req.query
+    const user=await User.find({phone_number}, {address:1});
+    res.send(user);
 
 })
 
