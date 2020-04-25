@@ -19,14 +19,46 @@ app.use(function(req,res,next){
 const authRoutes=require('./routes/authRoutes')
 app.use(bodyParser.json());
 
-
-
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('connected'))
     .catch(err => console.log(err));
 
 app.get('/signup', authRoutes)
 
+app.get('/Register', async(req,res)=>{
+    const {phone_number}=req.query
+    try{
+        const user=new user({phone_number});
+        await user.save();
+        res.send("success");
+    }
+    catch(err)
+    {
+        res.log(err.message);
+    }
+})
+
+app.get('/Check', async(req,res)=>{
+    const {phone_number}=req.query
+    const doExist=await User.find({phone_number}).countDocuments();
+    if(doExist>0)
+    {
+        res.send("exist");
+    }
+    else{
+        res.send("not");
+    }
+})
+
+app.get('/Signin',async(req,res)=>{
+    const {phone_number}=req.query
+    const user=await User.find({phone_number}, {address:1});
+    res.send(user);
+})
+
+app.get('/Update', async(req,res)=>{
+
+})
 app.listen(port, () => {
     console.log('running on 300');
 })
