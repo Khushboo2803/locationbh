@@ -28,7 +28,7 @@ app.get('/signup', authRoutes)
 app.get('/Register', async(req,res)=>{
     const {phone_number}=req.query
     try{
-        const user=new user({phone_number});
+        const user=new User({phone_number});
         await user.save();
         res.send("success");
     }
