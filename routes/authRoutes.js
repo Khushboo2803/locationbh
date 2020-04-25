@@ -13,6 +13,7 @@ router.get('/Update',async(req,res)=>{
 router.get('/Check', async(req,res)=>{
     const {phone_number}=req.query
     const doExist=await User.find({phone_number}).countDocuments();
+    console.log(doExist);
     if(doExist>0)
     {
         res.send("exist");
