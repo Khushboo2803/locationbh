@@ -7,9 +7,9 @@ const User= mongoose.model('user');
 router.get('/Update',async(req,res)=>{
     const {phone_number, address}=req.query;
     try{
-        await User.update({'phone_number':phone_number}, {$push: {'address': address}});
-        
-            res.send("success");
+        const response = await User.update({'phone_number':phone_number}, {$push: {'address': address}});
+
+            res.send(response);
         
        
     }
