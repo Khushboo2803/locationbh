@@ -13,8 +13,7 @@ router.get('/Update',async(req,res)=>{
 router.get('/Check', async(req,res)=>{
     const {phone_number}=req.query
     try{
-        const user=new User({phone_number});
-        await User.find({phone_number});
+        const user= await User.findOne({'phone_number' : phone_number});
         res.send("exist");
     }
     catch(err)
