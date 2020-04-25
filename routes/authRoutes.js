@@ -18,6 +18,19 @@ router.get('/signup', async(req, res) => {
     
 })
 
+router.get('/Register', async(req,res)=>{
+    const {phone_number}=req.query
+    try{
+        const user=new User({phone_number});
+        await user.save();
+        res.send("success");
+    }
+    catch(err)
+    {
+        res.send(err.message);
+    }
+})
+
 
 router.post('/signin', async (req,res)=>{
     const {phone_number, address}=req.params

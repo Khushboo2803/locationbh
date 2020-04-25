@@ -7,7 +7,7 @@ const port = process.env.PORT || 5000;
 const bodyParser = require('body-parser');
 const cors=require('cors');
 
-const User=mongoose.model('user');;
+require('./models/user');
 app.use(cors())
 
 app.use(function(req,res,next){
@@ -25,18 +25,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.get('/signup', authRoutes)
 
-app.get('/Register', async(req,res)=>{
-    const {phone_number}=req.query
-    try{
-        const user=new User({phone_number});
-        await user.save();
-        res.send("success");
-    }
-    catch(err)
-    {
-        res.send(err.message);
-    }
-})
+app.get('/Register', authRoutes)
 
 app.get('/Check', async(req,res)=>{
     const {phone_number}=req.query
