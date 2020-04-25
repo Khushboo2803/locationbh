@@ -9,7 +9,7 @@ router.get('/Update',async(req,res)=>{
     try{
         const response = await User.update({'phone_number':phone_number}, {$push: {'address': address}});
 
-            res.send(response);
+            res.send("success");
         
        
     }
