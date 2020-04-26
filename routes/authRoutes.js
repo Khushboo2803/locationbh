@@ -57,7 +57,7 @@ router.get('/Signin', async(req,res)=>{
     const {phone_number}=req.query
     try{
         const user=await User.findOne({phone_number});
-        console.log(user);
+        res.send(user);
     }
     catch(err)
     {
